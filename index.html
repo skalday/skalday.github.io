@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain - Pop Culture & Space</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            background-color: #ffed00;
+            color: #111;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px;
+            text-align: center;
+        }
+
+        /* Hero Section - 圖片和標題並排 */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Right Content */
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        /* Title Section */
+        .title-box {
+            display: inline-block;
+            padding: 2px 15px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0051ba;
+            letter-spacing: -1px;
+            font-family: "Oleo Script", system-ui;
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            max-width: 450px;
+            margin: 0 auto 0px;
+            line-height: 1.6;
+            font-family: "Noto Serif", serif;
+            font-weight: 400;
+        }
+
+        /* Links Section */
+        .links-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .link-item {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #4a4a4a;
+        }
+
+        .link-item a {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-weight: 400;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.2s ease;
+        }
+
+        .link-item a:hover {
+            border-bottom: 2px solid #4a4a4a;
+        }
+
+        .link-item.email {
+            color: #4a4a4a;
+            font-weight: 400;
+        }
+
+        /* Social Icons Section */
+        .social-icons {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px;
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            border: 3px solid #111;
+            text-decoration: none;
+            color: #111;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            box-shadow: 6px 6px 0 #111;
+            font-family: "Noto Serif", serif;
+        }
+
+        .social-icon:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 #111;
+        }
+
+        .social-icon:nth-child(1) {
+            background-color: #0051ba;
+            color: #ffffff;
+        }
+
+        .social-icon:nth-child(2) {
+            background-color: #0051ba;
+            color: #ffffff;
+        }
+
+        .social-icon:nth-child(3) {
+            background-color: #0051ba;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 15px;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-image {
+                max-width: 250px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .title-box {
+                padding: 12px 30px;
+            }
+
+            .tagline {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+
+            .link-item {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+
+            .social-icon {
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .title-box {
+                padding: 10px 25px;
+            }
+
+            .tagline {
+                font-size: 0.95rem;
+            }
+
+            .link-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <!-- Hero Image -->
+            <img src="picture.png" alt="Love & Peace" class="hero-image">
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <!-- Title -->
+                <div class="title-box">
+                    <h1>Hi! I'm Rain!</h1>
+                </div>
+
+                <!-- Tagline -->
+                <p class="tagline">
+                   Exploring pop culture through the lens of space planning, and turning ideas into small projects. Connect: skalday777★gmail.com(★→@)
+                </p>
+            </div>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="https://github.com/skalday" class="social-icon" target="_blank">
+                Github: My Toybox
+            </a>
+            <a href="https://skalday777.substack.com/" class="social-icon" target="_blank">
+                Substack: My Observation
+            </a>
+            <a href="https://instagram.com/lainzzz000" class="social-icon" target="_blank">
+                Instagram: My Daily Life
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2026 Skal Day</p>
+        </footer>
+    </div>
+</body>
+</html>
