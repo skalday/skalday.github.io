@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rain - Pop Culture & Space</title>
+    <title>About Rain</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,78 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Space Background Container */
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: shoot 3s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        /* Orbital Paths */
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Planets on orbits */
+        .planet {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
         .container {
@@ -33,6 +105,8 @@
             margin: 0 auto;
             padding: 20px 20px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         /* Hero Section - 圖片和標題並排 */
@@ -232,6 +306,9 @@
     </style>
 </head>
 <body>
+    <!-- Space Background -->
+    <div class="space-background" id="spaceBackground"></div>
+
     <div class="container">
         <div class="hero-section">
             <!-- Hero Image -->
@@ -254,13 +331,13 @@
         <!-- Social Icons -->
         <div class="social-icons">
             <a href="https://github.com/skalday" class="social-icon" target="_blank">
-                Github: My Toybox
+                ★ Github: My Toybox
             </a>
             <a href="https://skalday777.substack.com/" class="social-icon" target="_blank">
-                Substack: My Observation
+                ★ Substack: My Observation
             </a>
             <a href="https://instagram.com/lainzzz000" class="social-icon" target="_blank">
-                Instagram: My Daily Life
+               ★ Instagram: My Daily Life
             </a>
         </div>
 
@@ -268,5 +345,93 @@
             <p>© 2026 Skal Day</p>
         </footer>
     </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const spaceBackground = document.getElementById('spaceBackground');
+            const numStars = 200;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Random size
+                const size = Math.random() * 5 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                // Random animation delay
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                spaceBackground.appendChild(star);
+            }
+        }
+
+        // Create shooting stars
+        function createShootingStars() {
+            const spaceBackground = document.getElementById('spaceBackground');
+            
+            setInterval(() => {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                
+                // Random starting position (top area)
+                shootingStar.style.left = Math.random() * 100 + '%';
+                shootingStar.style.top = Math.random() * 30 + '%';
+                
+                spaceBackground.appendChild(shootingStar);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, 3000);
+            }, 4000); // New shooting star every 4 seconds
+        }
+
+        // Create orbital paths with planets
+        function createOrbits() {
+            const spaceBackground = document.getElementById('spaceBackground');
+            const orbits = [
+                { size: 150, duration: 15, planetSize: 4 },
+                { size: 250, duration: 25, planetSize: 6 },
+                { size: 350, duration: 35, planetSize: 5 }
+            ];
+            
+            orbits.forEach((orbitData, index) => {
+                const orbit = document.createElement('div');
+                orbit.className = 'orbit';
+                orbit.style.width = orbitData.size + 'px';
+                orbit.style.height = orbitData.size + 'px';
+                orbit.style.left = 'calc(50% - ' + (orbitData.size / 2) + 'px)';
+                orbit.style.top = 'calc(50% - ' + (orbitData.size / 2) + 'px)';
+                orbit.style.animationDuration = orbitData.duration + 's';
+                orbit.style.animationDelay = index * 5 + 's';
+                
+                // Create planet on orbit
+                const planet = document.createElement('div');
+                planet.className = 'planet';
+                planet.style.width = orbitData.planetSize + 'px';
+                planet.style.height = orbitData.planetSize + 'px';
+                planet.style.top = '0';
+                planet.style.left = 'calc(50% - ' + (orbitData.planetSize / 2) + 'px)';
+                
+                orbit.appendChild(planet);
+                spaceBackground.appendChild(orbit);
+            });
+        }
+
+        // Initialize all animations
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createShootingStars();
+            createOrbits();
+        });
+    </script>
 </body>
 </html>
