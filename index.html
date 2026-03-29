@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Rain</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - 只載入需要的字重 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -151,12 +151,14 @@
         /* Tagline */
         .tagline {
             font-size: 1.1rem;
-            color: #4a4a4a;
+            color: #111;
             max-width: 450px;
             margin: 0 auto 0px;
             line-height: 1.6;
-            font-family: "Noto Serif", serif;
+            font-family: "Inter", sans-serif;
+            font-optical-sizing: auto;
             font-weight: 400;
+            font-style: normal;
         }
 
         /* Links Section */
@@ -209,10 +211,12 @@
             text-decoration: none;
             color: #111;
             font-size: 1rem;
-            font-weight: 400;
             transition: all 0.2s ease;
             box-shadow: 6px 6px 0 #111;
-            font-family: "Noto Serif", serif;
+            font-family: "Inter", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
         }
 
         .social-icon:hover {
@@ -251,7 +255,8 @@
 
             .hero-section {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
+                margin-bottom: 20px;
             }
 
             .hero-content {
@@ -259,7 +264,7 @@
             }
 
             .hero-image {
-                max-width: 250px;
+                max-width: 150px;
             }
 
             h1 {
@@ -272,12 +277,16 @@
 
             .tagline {
                 font-size: 1rem;
-                margin-bottom: 40px;
+                margin-bottom: 30px;
             }
 
             .link-item {
                 font-size: 1.1rem;
                 margin-bottom: 25px;
+            }
+
+            .social-icons {
+                margin-top: 30px;
             }
 
             .social-icon {
