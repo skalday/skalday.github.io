@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Rain</title>
     
-    <!-- Google Fonts - 只載入需要的字重 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -30,7 +29,6 @@
             position: relative;
         }
 
-        /* Space Background Container */
         .space-background {
             position: fixed;
             top: 0;
@@ -41,7 +39,6 @@
             z-index: 0;
         }
 
-        /* Stars */
         .star {
             position: absolute;
             background: white;
@@ -54,7 +51,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Shooting Stars */
         .shooting-star {
             position: absolute;
             width: 2px;
@@ -79,7 +75,6 @@
             }
         }
 
-        /* Orbital Paths */
         .orbit {
             position: absolute;
             border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -92,7 +87,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Planets on orbits */
         .planet {
             position: absolute;
             background: white;
@@ -103,41 +97,37 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px 20px;
+            padding: 15px 20px;
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        /* Hero Section - 圖片和標題並排 */
         .hero-section {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
 
-        /* Hero Image */
         .hero-image {
             max-width: 250px;
             width: 100%;
             height: auto;
         }
 
-        /* Right Content */
         .hero-content {
             flex: 1;
             min-width: 300px;
             text-align: center;
         }
 
-        /* Title Section */
         .title-box {
             display: inline-block;
             padding: 2px 15px;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
 
         h1 {
@@ -148,7 +138,25 @@
             font-family: "Oleo Script", system-ui;
         }
 
-        /* Tagline */
+        .marquee-container {
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            color: #0051ba;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
         .tagline {
             font-size: 1.1rem;
             color: #111;
@@ -161,7 +169,6 @@
             font-style: normal;
         }
 
-        /* Links Section */
         .links-list {
             max-width: 600px;
             margin: 0 auto;
@@ -190,13 +197,12 @@
             font-weight: 400;
         }
 
-        /* Social Icons Section */
         .social-icons {
-            margin-top: 50px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
         }
 
         .social-icon {
@@ -239,24 +245,22 @@
             color: #ffffff;
         }
 
-        /* Footer */
         footer {
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: 20px;
+            padding: 10px;
             color: #666;
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 40px 15px;
+                padding: 20px 15px;
             }
 
             .hero-section {
                 flex-direction: column;
-                gap: 20px;
-                margin-bottom: 20px;
+                gap: 10px;
+                margin-bottom: 10px;
             }
 
             .hero-content {
@@ -277,7 +281,7 @@
 
             .tagline {
                 font-size: 1rem;
-                margin-bottom: 30px;
+                margin-bottom: 15px;
             }
 
             .link-item {
@@ -286,12 +290,14 @@
             }
 
             .social-icons {
-                margin-top: 30px;
+                margin-top: 15px;
+                gap: 10px;
             }
 
             .social-icon {
-                width: 100%;
-                max-width: none;
+                width: 90%;
+                max-width: 90%;
+                padding: 12px 20px;
             }
         }
 
@@ -315,29 +321,29 @@
     </style>
 </head>
 <body>
-    <!-- Space Background -->
     <div class="space-background" id="spaceBackground"></div>
 
     <div class="container">
         <div class="hero-section">
-            <!-- Hero Image -->
             <img src="picture.png" alt="Love & Peace" class="hero-image">
 
-            <!-- Hero Content -->
             <div class="hero-content">
-                <!-- Title -->
                 <div class="title-box">
                     <h1>Hi! I'm Rain!</h1>
                 </div>
 
-                <!-- Tagline -->
+                <div class="marquee-container">
+                    <div class="marquee">
+                        ★ Welcome to my digital space! ★ Exploring pop culture & space planning ★ Check out my projects below ★ Let's connect! ★
+                    </div>
+                </div>
+
                 <p class="tagline">
                    Exploring pop culture through the lens of space planning, and turning ideas into small projects. Connect: skalday777★gmail.com(★→@)
                 </p>
             </div>
         </div>
 
-        <!-- Social Icons -->
         <div class="social-icons">
             <a href="https://github.com/skalday" class="social-icon" target="_blank">
                 ★ Github: My Toybox
@@ -356,7 +362,6 @@
     </div>
 
     <script>
-        // Create stars
         function createStars() {
             const spaceBackground = document.getElementById('spaceBackground');
             const numStars = 200;
@@ -365,16 +370,13 @@
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                // Random position
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 
-                // Random size
                 const size = Math.random() * 5 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 
-                // Random animation delay
                 star.style.animationDelay = Math.random() * 3 + 's';
                 star.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 
@@ -382,7 +384,6 @@
             }
         }
 
-        // Create shooting stars
         function createShootingStars() {
             const spaceBackground = document.getElementById('spaceBackground');
             
@@ -390,20 +391,17 @@
                 const shootingStar = document.createElement('div');
                 shootingStar.className = 'shooting-star';
                 
-                // Random starting position (top area)
                 shootingStar.style.left = Math.random() * 100 + '%';
                 shootingStar.style.top = Math.random() * 30 + '%';
                 
                 spaceBackground.appendChild(shootingStar);
                 
-                // Remove after animation
                 setTimeout(() => {
                     shootingStar.remove();
                 }, 3000);
-            }, 4000); // New shooting star every 4 seconds
+            }, 4000);
         }
 
-        // Create orbital paths with planets
         function createOrbits() {
             const spaceBackground = document.getElementById('spaceBackground');
             const orbits = [
@@ -422,7 +420,6 @@
                 orbit.style.animationDuration = orbitData.duration + 's';
                 orbit.style.animationDelay = index * 5 + 's';
                 
-                // Create planet on orbit
                 const planet = document.createElement('div');
                 planet.className = 'planet';
                 planet.style.width = orbitData.planetSize + 'px';
@@ -435,7 +432,6 @@
             });
         }
 
-        // Initialize all animations
         window.addEventListener('DOMContentLoaded', () => {
             createStars();
             createShootingStars();
