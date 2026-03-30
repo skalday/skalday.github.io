@@ -16,6 +16,11 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Arial', 'Helvetica Neue', sans-serif;
             background-color: #ffed00;
@@ -25,7 +30,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
             position: relative;
         }
 
@@ -96,11 +100,13 @@
 
         .container {
             max-width: 1000px;
+            width: 100%;
             margin: 0 auto;
             padding: 15px 20px;
             text-align: center;
             position: relative;
             z-index: 1;
+            overflow-x: hidden;
         }
 
         .hero-section {
@@ -121,6 +127,7 @@
         .hero-content {
             flex: 1;
             min-width: 300px;
+            max-width: 100%;
             text-align: center;
         }
 
@@ -142,6 +149,7 @@
             margin: 0;
             overflow: hidden;
             white-space: nowrap;
+            max-width: 100%;
         }
 
         .marquee {
@@ -265,6 +273,7 @@
 
             .hero-content {
                 text-align: center;
+                min-width: 0;
             }
 
             .hero-image {
