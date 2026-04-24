@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     
     <style>
         * {
@@ -118,10 +119,138 @@
             flex-wrap: wrap;
         }
 
-        .hero-image {
+        .hero-image-container {
+            position: relative;
             max-width: 250px;
             width: 100%;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            width: 100%;
             height: auto;
+            cursor: pointer;
+            transition: transform 0.1s;
+            user-select: none;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+
+        .bounce {
+            animation: retro-bounce 0.2s cubic-bezier(0.36, 0, 0.66, -0.56);
+        }
+
+        @keyframes retro-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(-3deg) scale(1.05); }
+            50% { transform: translateY(-8px) rotate(3deg) scale(1.03); }
+            75% { transform: translateY(-3px) rotate(-1deg) scale(1.01); }
+        }
+
+        .game-star {
+            position: absolute;
+            font-size: 32px;
+            pointer-events: none;
+            animation: sparkle-out 0.8s forwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        @keyframes sparkle-out {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.3) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.2) rotate(360deg);
+            }
+        }
+
+        .click-counter {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Oleo Script", system-ui;
+            font-size: 1.5rem;
+            color: #0051ba;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .click-counter.active {
+            opacity: 1;
+        }
+
+        .explosion-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 237, 0, 0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        .explosion-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .explosion-message {
+            font-family: "Oleo Script", system-ui;
+            font-size: 4rem;
+            color: #0051ba;
+            margin-bottom: 30px;
+            animation: explosion-pulse 0.6s infinite;
+        }
+
+        @keyframes explosion-pulse {
+            0%, 100% { transform: scale(1) rotate(-2deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        .explosion-text {
+            font-family: "Inter", sans-serif;
+            font-size: 1.3rem;
+            color: #111;
+            margin-bottom: 25px;
+        }
+
+        .close-button {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            background: #0051ba;
+            border: 4px solid #111;
+            cursor: pointer;
+            box-shadow: 6px 6px 0 #111;
+            transition: all 0.2s;
+            font-family: "Inter", sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .close-button:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 #111;
         }
 
         .hero-content {
@@ -276,7 +405,7 @@
                 min-width: 0;
             }
 
-            .hero-image {
+            .hero-image-container {
                 max-width: 150px;
             }
 
@@ -308,6 +437,15 @@
                 max-width: 90%;
                 padding: 12px 20px;
             }
+
+            .explosion-message {
+                font-size: 2.5rem;
+            }
+
+            .click-counter {
+                font-size: 1.2rem;
+                bottom: -35px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -326,15 +464,29 @@
             .link-item {
                 font-size: 1rem;
             }
+
+            .explosion-message {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="space-background" id="spaceBackground"></div>
 
+    <!-- 爆炸全屏遮罩 -->
+    <div class="explosion-overlay" id="explosionOverlay">
+        <div class="explosion-message">💥 BOOM! 💥</div>
+        <p class="explosion-text">你發現了隱藏彩蛋！點了 77 次！🎉</p>
+        <button class="close-button" onclick="closeExplosion()">★ 關閉 ★</button>
+    </div>
+
     <div class="container">
         <div class="hero-section">
-            <img src="picture.png" alt="Love & Peace" class="hero-image">
+            <div class="hero-image-container">
+                <div class="click-counter" id="clickCounter">0 / 77</div>
+                <img src="picture.png" alt="Love & Peace" class="hero-image" id="heroImage">
+            </div>
 
             <div class="hero-content">
                 <div class="title-box">
@@ -439,6 +591,81 @@
                 orbit.appendChild(planet);
                 spaceBackground.appendChild(orbit);
             });
+        }
+
+        // 遊戲邏輯
+        let clickCount = 0;
+        const maxClicks = 77;
+        const heroImage = document.getElementById('heroImage');
+        const clickCounter = document.getElementById('clickCounter');
+        const imageContainer = document.querySelector('.hero-image-container');
+        const explosionOverlay = document.getElementById('explosionOverlay');
+
+        heroImage.addEventListener('click', function(e) {
+            if (clickCount >= maxClicks) return;
+
+            clickCount++;
+            clickCounter.textContent = `${clickCount} / ${maxClicks}`;
+            
+            // 顯示計數器
+            if (clickCount === 1) {
+                clickCounter.classList.add('active');
+            }
+
+            // 跳動動畫
+            heroImage.classList.remove('bounce');
+            void heroImage.offsetWidth;
+            heroImage.classList.add('bounce');
+
+            // 產生星星
+            createGameStars(e);
+
+            // 檢查是否達到 77
+            if (clickCount === maxClicks) {
+                setTimeout(showExplosion, 400);
+            }
+        });
+
+        function createGameStars(e) {
+            const starEmojis = ['⭐', '✨', '💫', '🌟'];
+            const numStars = Math.floor(Math.random() * 2) + 3;
+
+            const rect = heroImage.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'game-star';
+                star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+                
+                const angle = (Math.random() * 360) * Math.PI / 180;
+                const distance = Math.random() * 100 + 60;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                star.style.setProperty('--tx', `${tx}px`);
+                star.style.setProperty('--ty', `${ty}px`);
+                
+                star.style.left = clickX + 'px';
+                star.style.top = clickY + 'px';
+                
+                imageContainer.appendChild(star);
+                
+                setTimeout(() => star.remove(), 800);
+            }
+        }
+
+        function showExplosion() {
+            explosionOverlay.classList.add('active');
+        }
+
+        function closeExplosion() {
+            explosionOverlay.classList.remove('active');
+            clickCount = 0;
+            clickCounter.textContent = '0 / 77';
+            clickCounter.classList.remove('active');
+            heroImage.classList.remove('bounce');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
